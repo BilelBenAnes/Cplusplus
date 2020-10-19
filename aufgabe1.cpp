@@ -91,10 +91,10 @@ struct AtcoCommand {
     sequence(line, word_Sequence);
     command(line, commands);
 
-    //  for (int i = 0; i < 6; i++)
-    //  {
-    //    cout<<commands[i]<< " "<<endl;
-    //  }
+     for (int i = 0; i < 6; i++)
+     {
+       cout<<commands[i]<< " "<<endl;
+     }
 
   }
   void command(string & line, string commands[6]) {
@@ -155,7 +155,7 @@ int main() {
   int j = 0;
 
   bool test = true;
-  ifstream myfile(".\exemple.txt");
+  ifstream myfile("/exemple.txt");
   if (myfile.is_open()) {
     while (myfile.good()) {
       myfile >> word;
