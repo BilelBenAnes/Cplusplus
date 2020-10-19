@@ -155,7 +155,7 @@ int main() {
   int j = 0;
 
   bool test = true;
-  ifstream myfile("D:\\9raya\\c++\\exemple.txt");
+  ifstream myfile(".\exemple.txt");
   if (myfile.is_open()) {
     while (myfile.good()) {
       myfile >> word;
