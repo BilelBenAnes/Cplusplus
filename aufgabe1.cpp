@@ -6,11 +6,12 @@
 
 #include <fstream>
 
-#include<string>  
+#include <string>
 
 using namespace std;
 
-struct DateTime {
+struct DateTime
+{
   int year;
   int month;
   int day;
@@ -19,29 +20,29 @@ struct DateTime {
   int sec;
   int millisec;
 
-  DateTime() {
-
+  DateTime()
+  {
   }
-  DateTime(string date, string time) {
+  DateTime(string date, string time)
+  {
 
     spliting(date, day, month, year);
 
     spliting(time, millisec, sec, min, hour);
-  
   }
 
-  void spliting(string date, int & day, int & month, int & year) {
+  void spliting(string date, int &day, int &month, int &year)
+  {
 
     year = stoi(split(date, "-"));
 
     month = stoi(split(date, "-"));
 
     day = stoi(date);
-
   }
 
-  void spliting(string time, int & millisec, int & sec, int & min, int & hour) {
-
+  void spliting(string time, int &millisec, int &sec, int &min, int &hour)
+  {
 
     string out;
     hour = stoi(split(time, "-"));
@@ -51,24 +52,22 @@ struct DateTime {
     sec = stoi(split(time, "-"));
 
     millisec = stoi(time);
-
   }
-  string split(string & line, string delimiter) {
+  string split(string &line, string delimiter)
+  {
     string key_word = line.substr(0, line.find(delimiter));
     line.erase(0, line.find(key_word) + key_word.length() + 1);
     return key_word;
   }
-    string abc;
-  string toString(){
-   
-    return  " ("+to_string(day) +"-"+to_string(month)+"-"+to_string(year)+"-"+to_string(hour)+":"+to_string(min)+":"+to_string(sec)+ ") :" ;
-     
-  
-    
-  }
+  string abc;
+  string toString()
+  {
 
-}; 
-struct AtcoCommand {
+    return " (" + to_string(day) + "-" + to_string(month) + "-" + to_string(year) + "-" + to_string(hour) + ":" + to_string(min) + ":" + to_string(sec) + ") :";
+  }
+};
+struct AtcoCommand
+{
 
   string file_Name;
   string word_Sequence;
@@ -77,33 +76,38 @@ struct AtcoCommand {
   string time;
   DateTime dateAndTime;
 
-  public: AtcoCommand() {
-
+public:
+  AtcoCommand()
+  {
   }
-  public: AtcoCommand(string line) {
+
+public:
+  AtcoCommand(string line)
+  {
     // cout<<line<<"\n";
 
-    date_and_time(line, date, time);
+    getDateTime(line, date, time);
     dateAndTime = DateTime(date, time);
     // cout << date << " " << time << endl;
-    file_Name += date + "__" + time+ dateAndTime.toString() ;
-    cout<<file_Name<<endl;
-    sequence(line, word_Sequence);
-    command(line, commands);
+    file_Name += date + "__" + time + dateAndTime.toString();
+    cout << file_Name << endl;
+    getWordSequence(line, word_Sequence);
+    getCommand(line, commands);
 
     //  for (int i = 0; i < 6; i++)
     //  {
     //    cout<<commands[i]<< " "<<endl;
     //  }
-
   }
-  void command(string & line, string commands[6]) {
+  void getCommand(string &line, string commands[6])
+  {
     string delimiter = " ";
     string key_word = line.substr(0, line.find(delimiter));
     line.erase(0, line.find(key_word) + key_word.length());
     int commands_counter = 0;
     string copy = "";
-    while (line.find(key_word) != -1) {
+    while (line.find(key_word) != -1)
+    {
       copy = line.substr(0, line.find(key_word));
       line.erase(0, line.find(key_word) + key_word.length());
       commands[commands_counter++] = key_word + copy;
@@ -111,15 +115,18 @@ struct AtcoCommand {
     commands[commands_counter++] = key_word + line;
   }
 
-  void sequence(string & line, string & word_Sequence) {
+  void getWordSequence(string &line, string &word_Sequence)
+  {
     int counter = 0;
-    while ((line[counter] >= 97 && line[counter] <= 122) || line[counter] == ' ') {
+    while ((line[counter] >= 97 && line[counter] <= 122) || line[counter] == ' ')
+    {
       word_Sequence += line[counter++];
     }
     line.erase(0, counter);
   }
 
-  void date_and_time(string & line, string & date, string & time) {
+  void getDateTime(string &line, string &date, string &time)
+  {
     string delimiter = ":";
     string date_and_time = line.substr(0, line.find(delimiter));
     line.erase(0, line.find(delimiter) + 2);
@@ -130,22 +137,22 @@ struct AtcoCommand {
   }
 
   string tostring = "";
-  string toString() {
-    // return file_Name + word_Sequence;
-    tostring += file_Name + " "+  word_Sequence;
+  string toString()
+  {
+    tostring += file_Name + " " + word_Sequence;
 
     string commands_Strings = "";
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 6; i++)
+    {
       commands_Strings += commands[i];
     }
     tostring += commands_Strings;
 
     return tostring;
-
   }
-
 };
-int main() {
+int main()
+{
   AtcoCommand atcTab[1000];
   int atcTab_index = 0;
   string word;
@@ -155,13 +162,17 @@ int main() {
   int j = 0;
 
   bool test = true;
-  ifstream myfile("D:\\9raya\\c++\\exemple.txt");
-  if (myfile.is_open()) {
-    while (myfile.good()) {
+  ifstream myfile("inputText.txt");
+  if (myfile.is_open())
+  {
+    while (myfile.good())
+    {
       myfile >> word;
 
-      if (word.size() == 24) {
-        if (line.size() != 0) {
+      if (word.size() == 24)
+      {
+        if (line.size() != 0)
+        {
           AtcoCommand atc = AtcoCommand(line);
           // cout<<atc.toString()<< endl;
           atcTab[atcTab_index++] = atc;
@@ -170,12 +181,11 @@ int main() {
           line = "";
         }
         line += word + " ";
-
-      } else {
-        line += word + " ";
-
       }
-
+      else
+      {
+        line += word + " ";
+      }
     }
     //  cout<<line;
     AtcoCommand atc = AtcoCommand(line);
