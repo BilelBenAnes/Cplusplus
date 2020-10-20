@@ -35,4 +35,4 @@
 2019-02-15__11-38-55-00:
    lufthansa triple nine alfa good morning radar contact kilo is correct
    DLH999A INIT_RESPONSE
-   DLHADB INFORMATION ATIS K
+   DLHADB INFORMATION ATIS 
