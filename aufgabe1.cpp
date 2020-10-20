@@ -85,20 +85,20 @@ struct AtcoCommand {
 
   }
   public: AtcoCommand(string line) {
-    // cout<<line<<"\n";
+  //  cout<<line<<"\n";
 
     date_and_time(line, date, time);
     dateAndTime = DateTime(date, time);
 
     file_Name += date + "__" + time+ dateAndTime.toString() ;
-   // cout<<file_Name<<endl;
+   //cout<<file_Name<<endl;
     sequence(line, word_Sequence);
     command(line, commands);
 
-     for (int i = 0; i < 6; i++)
-     {
-       cout<<commands[i]<< " "<<endl;
-     }
+    //  for (int i = 0; i < 6; i++)
+    //  {
+    //    cout<<commands[i]<< " "<<endl;
+    //  }
 
   }
   void command(string & line, string commands[6]) {
@@ -115,11 +115,11 @@ struct AtcoCommand {
     commands[commands_counter++] = key_word + line;
   }
 
-  void sequence(string & line, string & word_Sequence1) {
+  void sequence(string & line, string & word_Sequence) {
     int counter = 2;
-    cout<<&word_Sequence1<<endl;
+  
     while ((line[counter] >= 97 && line[counter] <= 122) || line[counter] == ' ') {
-      word_Sequence1 += line[counter++];
+      word_Sequence += line[counter++];
     }
    
     line.erase(0, counter);
@@ -164,22 +164,22 @@ struct AtcoCommand {
 //    }
 //    return true;
 // }
-bool sequenceTest(string line, string sequence){
-  // cout<<line<<endl;
-  // cout<<sequence<<endl;
+// bool sequenceTest(string line, string sequence){
+//   // cout<<line<<endl;
+//   // cout<<sequence<<endl;
 
-  string word_Sequence;
-  cout<<&word_Sequence;
-  AtcoCommand test=AtcoCommand();
-  test.sequence(line,word_Sequence);
-  cout<<word_Sequence<<endl;
-  // if(sequence.compare(word_Sequence)==0){
-  //   return true;
-  // }
+//   string word_Sequence;
+//   cout<<&word_Sequence;
+//   AtcoCommand test=AtcoCommand();
+//   test.sequence(line,word_Sequence);
+//   cout<<word_Sequence<<endl;
+//   // if(sequence.compare(word_Sequence)==0){
+//   //   return true;
+//   // }
 
 
-  return false;
-}
+//   return false;
+// }
 bool splitTest( string date, string delimiter) {
    
 
@@ -210,14 +210,14 @@ int main() {
   int j = 0;
 
   bool test = true;
-  ifstream myfile("/exemple.txt");
+  ifstream myfile("D:\\9raya\\c++\\exemple.txt");
   if (myfile.is_open()) {
     while (myfile.good()) {
       myfile >> word;
 
       if (word.size() == 24) {
         if (line.size() != 0) {
-          AtcoCommand atc = AtcoCommand(line);
+          AtcoCommand atc =  AtcoCommand(line);
           // cout<<atc.toString()<< endl;
           atcTab[atcTab_index++] = atc;
           line = "";
@@ -234,11 +234,11 @@ int main() {
     atcTab[atcTab_index++] = atc;
     myfile.close();
   }
-   cout<<text;
-  // for (size_t i = 0; i < 3; i++) {
-  //   cout << atcTab[i].toString() << endl;
-  // }
- cout<<sequenceTest("2019-02-15__11-32-02-00:  speedbird five two charlie climb flight level two two zero", "speedbird five two charlie climb flight level two two zero");
+  // cout<<text;
+  for (size_t i = 0; i < 3; i++) {
+    cout << atcTab[i].toString() << endl;
+  }
+ //cout<<sequenceTest("2019-02-15__11-32-02-00:  speedbird five two charlie climb flight level two two zero", "speedbird five two charlie climb flight level two two zero");
 
 
   return 0;
