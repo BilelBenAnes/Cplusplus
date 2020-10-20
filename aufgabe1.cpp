@@ -8,6 +8,10 @@
 
 #include<string>  
 
+#include <iomanip> // wegen setw
+
+#include <cassert> // wegen assert
+
 using namespace std;
 
 struct DateTime {
@@ -58,10 +62,10 @@ struct DateTime {
     line.erase(0, line.find(key_word) + key_word.length() + 1);
     return key_word;
   }
-    string abc;
+
   string toString(){
    
-    return  " ("+to_string(day) +"-"+to_string(month)+"-"+to_string(year)+"-"+to_string(hour)+":"+to_string(min)+":"+to_string(sec)+ ") :" ;
+    return  " ("+to_string(day) +"-"+to_string(month)+"-"+to_string(year)+"-"+to_string(hour)+":"+to_string(min)+":"+to_string(sec)+ "):" ;
      
   
     
@@ -85,9 +89,9 @@ struct AtcoCommand {
 
     date_and_time(line, date, time);
     dateAndTime = DateTime(date, time);
-    // cout << date << " " << time << endl;
+
     file_Name += date + "__" + time+ dateAndTime.toString() ;
-    cout<<file_Name<<endl;
+   // cout<<file_Name<<endl;
     sequence(line, word_Sequence);
     command(line, commands);
 
@@ -111,18 +115,20 @@ struct AtcoCommand {
     commands[commands_counter++] = key_word + line;
   }
 
-  void sequence(string & line, string & word_Sequence) {
-    int counter = 0;
+  void sequence(string & line, string & word_Sequence1) {
+    int counter = 2;
+    cout<<&word_Sequence1<<endl;
     while ((line[counter] >= 97 && line[counter] <= 122) || line[counter] == ' ') {
-      word_Sequence += line[counter++];
+      word_Sequence1 += line[counter++];
     }
+   
     line.erase(0, counter);
   }
 
   void date_and_time(string & line, string & date, string & time) {
     string delimiter = ":";
     string date_and_time = line.substr(0, line.find(delimiter));
-    line.erase(0, line.find(delimiter) + 2);
+    line.erase(0, line.find(delimiter) );
     delimiter = "__";
 
     date = date_and_time.substr(0, date_and_time.find(delimiter));
@@ -145,7 +151,56 @@ struct AtcoCommand {
   }
 
 };
+
+// bool testInit() {
+//    Vektor v;
+//    v.dimension=4;
+//    const int wert=81;
+//    Init(v, wert);
+//    for (int i=0; i<v.dimension; ++i)   {
+//       if (v.daten[i] != wert) {
+//          return false;
+//       }
+//    }
+//    return true;
+// }
+bool sequenceTest(string line, string sequence){
+  // cout<<line<<endl;
+  // cout<<sequence<<endl;
+
+  string word_Sequence;
+  cout<<&word_Sequence;
+  AtcoCommand test=AtcoCommand();
+  test.sequence(line,word_Sequence);
+  cout<<word_Sequence<<endl;
+  // if(sequence.compare(word_Sequence)==0){
+  //   return true;
+  // }
+
+
+  return false;
+}
+bool splitTest( string date, string delimiter) {
+   
+
+  
+  DateTime d=DateTime();
+  string year=d.split(date,delimiter);
+    // cout<<"2019"<<"="<<year;
+  if (year.compare("2019") == 0){
+
+   return true;
+   
+  }
+
+  return false;
+}
+
+
+
+
 int main() {
+
   AtcoCommand atcTab[1000];
   int atcTab_index = 0;
   string word;
@@ -165,8 +220,6 @@ int main() {
           AtcoCommand atc = AtcoCommand(line);
           // cout<<atc.toString()<< endl;
           atcTab[atcTab_index++] = atc;
-          // cout<<line<<endl;
-          //       text=line+"\n";
           line = "";
         }
         line += word + " ";
@@ -177,17 +230,16 @@ int main() {
       }
 
     }
-    //  cout<<line;
     AtcoCommand atc = AtcoCommand(line);
-    // cout<<atc.toString();
-
     atcTab[atcTab_index++] = atc;
     myfile.close();
   }
-  //  cout<<text;
+   cout<<text;
   // for (size_t i = 0; i < 3; i++) {
   //   cout << atcTab[i].toString() << endl;
   // }
+ cout<<sequenceTest("2019-02-15__11-32-02-00:  speedbird five two charlie climb flight level two two zero", "speedbird five two charlie climb flight level two two zero");
+
 
   return 0;
 }
