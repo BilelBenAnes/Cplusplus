@@ -1,0 +1,4 @@
+2019-02-15__11-32-02-00: 
+   speedbird five two charlie victor praha radar radar contact climb   flight level one two zero  
+   BAW52CV INIT_RESPONSE
+   BAW52CV CLIMB 120 FL
