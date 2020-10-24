@@ -7,6 +7,12 @@
         "xlocale": "cpp",
         "iostream": "cpp",
         "sstream": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "system_error": "cpp",
+        "type_traits": "cpp",
+        "xtr1common": "cpp",
+        "algorithm": "cpp",
+        "xiosbase": "cpp",
+        "atomic": "cpp"
     }
 }
