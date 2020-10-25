@@ -1,0 +1,8 @@
+The top20 type occurences specified in longTest.txt
+1.       INIT_RESPONSE:   4
+                 CLIMB:   3
+               CLEARED:   3
+           INFORMATION:   2
+             DIRECT_TO:   2
+            NO_CONCEPT:   1
+               DESCEND:   1
